@@ -1,0 +1,260 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix lidl: <http://www.dfki.org/lidl#> .
+
+######################################################
+# Predefined lidl:Atomic instances
+######################################################
+
+lidl:UnsignedByte
+  rdfs:subClassOf lidl:Atomic ;
+  lidl:endianess lidl:LittleEndian ;
+  lidl:byteSize 1 ;
+  lidl:datatype xsd:unsignedByte .
+  
+lidl:Integer32
+  a lidl:Atomic ;
+  lidl:endianess lidl:LittleEndian ;
+  lidl:byteSize 4 ;
+  lidl:datatype xsd:integer .
+
+
+######################################################
+# lidl:Endianess and its instances
+######################################################
+
+lidl:Endianess a rdfs:Class .
+lidl:LittleEndian a lidl:Endianess .
+lidl:MiddleEndian a lidl:Endianess .
+lidl:BigEndian a lidl:Endianess .
+
+
+######################################################
+# lidl:Expressions
+######################################################
+
+lidl:Expression
+  a sh:NodeShape ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+    sh:path lidl:operator ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:node lidl:ArgumentList
+  ] .
+
+lidl:ArgumentList
+  a sh:NodeShape ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+    sh:path [ sh:zeroOrMorePath rdf:rest ] ;
+    sh:hasValue rdf:nil ;
+    sh:node lidl:Argument 
+  ] .
+
+lidl:Argument
+  a sh:NodeShape ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:or ( 
+    [
+      sh:hasValue rdf:nil ;
+      sh:property [
+        sh:path rdf:first ;
+        sh:maxCount 0 ;
+      ] ;
+      sh:property [
+        sh:path rdf:rest ;
+        sh:maxCount 0 ;
+      ] ;
+    ]
+    [
+      sh:not [ sh:hasValue rdf:nil ] ;
+      sh:property [
+        sh:path rdf:first ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:or (
+          [ sh:nodeKind sh:Literal ]
+          [ sh:node lidl:Attribute ]
+          [ sh:node lidl:Expression ]
+        )
+      ] ;
+      sh:property [
+        sh:path rdf:rest ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:node lidl:ArgumentList
+      ] ;
+    ]
+  ) .
+  
+lidl:operator 
+  a rdf:Property ;
+  rdfs:domain lidl:Expression ;
+  rdfs:range lidl:ArgumentList .
+
+lidl:multiply rdfs:subPropertyOf lidl:operator . 
+lidl:add rdfs:subPropertyOf lidl:operator . 
+  
+
+
+######################################################
+# lidl:Layout and related properties
+######################################################
+
+lidl:Layout 
+  a rdfs:Class , sh:NodeShape ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+    sh:description "Each layout MAY specify its endianess" ;
+    sh:path lidl:endianess ;
+    sh:maxCount 1 ;
+    sh:in ( lidl:BigEndian lidl:MiddleEndian lidl:LittleEndian ) 
+  ] .
+
+lidl:endianess 
+  a rdf:Property ;
+  rdfs:domain lidl:Layout ;
+  rdfs:range lidl:Endianess .
+
+
+######################################################
+# lidl:Composite and related properties
+######################################################
+
+lidl:Composite 
+  a sh:NodeShape ;
+  rdfs:subClassOf lidl:Layout ;
+  sh:property [
+    sh:description "Each Composite layout MUST have some attributes" ;
+    sh:path lidl:attribute ;
+    sh:minCount 1 ;
+    sh:node lidl:Attribute
+  ] .
+
+lidl:attribute 
+  a rdf:Property ;
+  rdfs:subPropertyOf sh:property ;
+  rdfs:domain lidl:Composite ;
+  rdfs:range lidl:Attribute .
+
+
+######################################################
+# lidl:Atomic and related properties
+######################################################
+
+lidl:Atomic 
+#  a sh:NodeShape ;
+  rdfs:subClassOf lidl:Layout ;
+  sh:property [
+    sh:description "Each Atomic layout MUST map to an RDFS datatype" ;
+    sh:path lidl:datatype ;
+    sh:minCount 1 ;
+    sh:maxCount 1  
+  ] ;
+  sh:or (
+    [  
+      sh:property [
+        sh:description "Each Atomic layout MUST specify its bitSize or byteSize." ;  
+        sh:path lidl:bitSize ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer 
+      ]
+    ]
+    [
+      sh:property [
+        sh:description "Each Atomic layout MUST specify its bitSize or byteSize." ;  
+        sh:path lidl:byteSize ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer 
+      ]
+    ]
+  ) .
+
+lidl:datatype 
+  a rdf:Property ;
+  rdfs:domain lidl:Atomic ;
+  rdfs:range rdfs:Datatype .
+
+lidl:bitSize
+  a rdf:Property ;
+  rdfs:domain lidl:Atomic ;
+  rdfs:range xsd:integer .
+
+lidl:byteSize
+  a rdf:Property ;
+  rdfs:domain lidl:Atomic ;
+  rdfs:range xsd:integer .
+
+
+######################################################
+# lidl:Attribute and related properties
+######################################################
+
+lidl:Attribute 
+  a rdfs:Class , sh:NodeShape ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+    sh:description "Each attribute SHOULD define its order in a layout." ;
+    sh:path lidl:order ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:integer ;
+  ] ;
+  sh:property [
+    sh:description "Each attribute MAY map via the specified Property." ;
+    sh:path lidl:predicate ;
+    sh:maxCount 1 ;
+    sh:class rdf:Property ;
+  ] ;
+  sh:property [
+    sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
+    sh:path lidl:elementShape ;
+    sh:minCount 1 ;
+#    sh:maxCount 1 ;
+    sh:node lidl:Layout ;
+  ] ;
+  sh:xone (
+    [
+      sh:property [
+        sh:description "Each attribute MUST specify the number of its (sub) elements." ;
+        sh:path lidl:elementCount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+      ]
+    ]
+    [
+      sh:property [
+        sh:description "Each attribute MUST specify the number of its (sub) elements." ;
+        sh:path lidl:elementCount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:node lidl:Expression ;
+      ]
+    ]
+  ) .  
+  
+
+lidl:order
+  a rdf:Property ;
+  rdfs:subClassOf sh:order ;
+  rdfs:domain lidl:Attribute .
+#  rdfs:range xsd:integer .
+
+lidl:predicate
+  a rdf:Property ;
+  rdfs:subClassOf sh:path ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range rdf:Property .
+  
+lidl:elementCount
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range xsd:integer .
+
+lidl:elementShape
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range lidl:Layout .

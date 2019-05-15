@@ -1,0 +1,62 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix lidl: <http://www.dfki.org/lidl#> .
+
+@prefix ex:	<http://example.com/ns#> .
+@prefix img: <http://www.bar.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix exif: <http://www.w3.org/2003/12/exif/ns> .
+
+##################################################
+# RGB Image Layout
+##################################################
+
+img:RGBImage
+  lidl:endianess lidl:LittleEndian ;
+  lidl:attribute _:width , _:height , _:pixels . 
+  
+_:width
+  lidl:predicate exif:width ;
+  lidl:order 0;
+  lidl:elementCount 1 ;
+  lidl:elementShape lidl:Integer32 .
+    
+_:height
+  lidl:predicate exif:height ;
+  lidl:order 1;
+  lidl:elementCount 1 ;
+  lidl:elementShape lidl:Integer32 . 
+
+
+_:pixels
+  lidl:predicate img:pixels ; 
+  lidl:order 2 ;
+  lidl:elementCount [ lidl:multiply ( _:width _:height [ lidl:add ( 3 _:height ) ] ) ] ;
+  lidl:elementShape img:RGBPixel .
+
+
+##################################################
+# RGB Pixel Layout
+##################################################
+
+img:RGBPixel
+  lidl:endianess lidl:LittleEndian ;
+  lidl:attribute [
+    lidl:predicate img:red ;
+    lidl:order 0;
+    lidl:elementCount 1 ;
+    lidl:elementShape lidl:UnsignedByte   
+  ] , [
+    lidl:predicate img:green ;
+    lidl:order 1;
+    lidl:elementCount 1 ;
+    lidl:elementShape lidl:UnsignedByte     
+  ] , [
+    lidl:predicate img:blue ;
+    lidl:order 1;
+    lidl:elementCount 1 ;
+    lidl:elementShape lidl:UnsignedByte     
+  ] .

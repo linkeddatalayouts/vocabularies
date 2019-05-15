@@ -1,0 +1,97 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix lidl: <http://www.dfki.org/lidl#> .
+
+@prefix jpeg:	<http://example.com/ns#> .
+@prefix img: <http://www.bar.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix exif: <http://www.w3.org/2003/12/exif/ns> .
+
+
+jpeg:Segment
+  lidl:attribute
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ]  ] , 
+    [ lidl:predicate jpeg:segmentLength ; lidl:order 2 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:UnsignedShortBigEndian ]  ] .
+    
+    
+jpeg:Image
+  lidl:attribute
+    _:segments , 
+    [ lidl:predicate exif:width ; lidl:elementCount 1 ; lidl:elementShape _:width ] , 
+    [ lidl:predicate exif:height ; lidl:elementCount 1 ; lidl:elementShape _:height ] .
+    
+    
+_:segments
+  lidl:order 0 ;
+  lidl:elementCount 100000 ;
+  lidl:elementShape _:bla , _:blub , jpeg:Segment . 
+   
+
+_:bla 
+  a jpeg:Segment ;
+  lidl:attribute 
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ; lidl:value "0xc"^^xsd:byte ]  ] ,
+    [ lidl:predicate jpeg:data ; lidl:order 3 ;  lidl:elementCount 1 ; lidl:elementShape jpeg:SegmentSof0 ] .   
+
+  
+jpeg:SegmentSof0
+  lidl:attribute _:image_height , _:image_width .
+
+
+_:image_height
+  lidl:predicate exif:height ;
+  lidl:order 1 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape  _:height .
+  
+ _:height a lidl:UnsignedShortBigEndian .   
+
+_:image_width
+  lidl:predicate exif:width ;
+  lidl:order 2 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape _:width . 
+  
+  
+_:width a lidl:UnsignedShortBigEndian .
+
+
+_:blub
+  a jpeg:Segment ;
+  lidl:attribute 
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ; lidl:value "0xe0"^^xsd:byte ]  ] ,
+    [ lidl:predicate jpeg:data ; lidl:order 3 ;  lidl:elementCount 1 ; lidl:elementShape jpeg:SegmentApp0 ] .   
+
+
+
+
+jpeg:SegmentApp0
+  lidl:attribute _:version_major , _:version_minor .
+
+ _:version_major
+  lidl:predicate jpeg:majorVersion ;
+  lidl:order 1 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape _:1 .
+  
+  
+_:1 a lidl:UnsignedByte .
+ 
+ _:version_minor
+  lidl:predicate jpeg:minorVersion ;
+  lidl:order 2 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape _:2 .
+
+_:2 a lidl:UnsignedByte .
+
+lidl:UnsignedShortBigEndian
+  rdfs:subClassOf lidl:Atomic ;
+  lidl:endianess lidl:BigEndian ;
+  lidl:byteSize 1 ;
+  lidl:datatype xsd:unsignedByte .
+  
+  
