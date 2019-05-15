@@ -44,7 +44,7 @@ img:RGBPixelBuffer
   lidl:attribute [
       lidl:order 0 ;
       lidl:count [ lidl:mul ( _:width _:height ) ] ;
-      lidl:layout img:RGBPixel .
+      lidl:layout img:RGBPixel 
   ] .
 
 
