@@ -333,15 +333,13 @@ lidl:NOT
 
 lidl:Bit
   rdfs:label "A bit." ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:bitSize 1 ;
   lidl:datatype xsd:Boolean .
 
 lidl:Byte
   rdfs:label "A byte." ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 1 ;
   lidl:bitSize 8 ;
   lidl:datatype xsd:byte .
@@ -349,8 +347,7 @@ lidl:Byte
 lidl:ByteBoolean
   rdfs:label "A byte boolean." ;
   rdfs:comment "True iff not equal 0, False otherwise." ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 1 ;
   lidl:bitSize 8 ;
   lidl:datatype xsd:Boolean .
@@ -365,8 +362,7 @@ lidl:UInt8
 
 lidl:Int8
   rdfs:label "An 8-bit signed integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 1 ;
   lidl:bitSize 8 ;
   lidl:datatype xsd:byte .
@@ -380,40 +376,35 @@ lidl:UInt16
 
 lidl:Int16
   rdfs:label "A 16-bit signed integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 2 ;
   lidl:bitSize 16 ;
   lidl:datatype xsd:short .
 
 lidl:UInt32
   rdfs:label "A 32-bit unsigned integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 4 ;
   lidl:bitSize 32 ;
   lidl:datatype xsd:unsignedInt .
 
 lidl:Int32
   rdfs:label "A 32-bit signed integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 4 ;
   lidl:bitSize 32 ;
   lidl:datatype xsd:int .
 
 lidl:UInt64
   rdfs:label "A 64-bit unsigned integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 8 ;
   lidl:bitSize 64 ;
   lidl:datatype xsd:unsignedLong .
 
 lidl:Int64
   rdfs:label "A 64-bit signed integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 8 ;
   lidl:bitSize 64 ;
   lidl:datatype xsd:long .
@@ -422,8 +413,7 @@ lidl:Float16
   rdfs:label "A 16-bit IEEE754 floating point number." ;
   rdfs:isDefinedBy <https://ieeexplore.ieee.org/document/4610935> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/IEEE_754> ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 2 ;
   lidl:bitSize 16 ;
   lidl:datatype xsd:float .
@@ -432,8 +422,7 @@ lidl:Float32
   rdfs:label "A 32-bit IEEE754 floating point number." ;
   rdfs:isDefinedBy <https://ieeexplore.ieee.org/document/4610935> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/IEEE_754> ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 4 ;
   lidl:bitSize 32 ;
   lidl:datatype xsd:float .
@@ -443,8 +432,7 @@ lidl:Float64
   rdfs:isDefinedBy <https://ieeexplore.ieee.org/document/4610935> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/IEEE_754> ;
   owl:sameAs lidl:Double ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 8 ;
   lidl:bitSize 64 ;
   lidl:datatype xsd:double .
@@ -453,8 +441,7 @@ lidl:ASCII
   rdfs:label "An ASCII character." ;
   rdfs:isDefinedBy <https://doi.org/10.1145%2F366959.366961> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/ASCII> ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 1 ;
   lidl:bitSize 8 ;
   lidl:datatype xsd:string .
@@ -463,8 +450,7 @@ lidl:UTF16
   rdfs:label "An UTF-16 character." ;
   rdfs:isDefinedBy <https://tools.ietf.org/html/rfc2781> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/UTF-16> ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 2 ;
   lidl:bitSize 16 ;
   lidl:datatype xsd:string .
@@ -473,8 +459,7 @@ lidl:UTF32
   rdfs:label "An UTF-32 character." ;
   rdfs:isDefinedBy <https://www.unicode.org/reports/tr19/tr19-9.html> ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/UTF-32> ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 3 ;
   lidl:bitSize 32 ;
   lidl:datatype xsd:string .
