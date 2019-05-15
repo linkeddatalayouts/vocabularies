@@ -136,12 +136,24 @@ lidl:Attribute
     sh:maxCount 1 ;
     sh:class rdf:Property ;
   ] ;
-  sh:property [
-    sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
-    sh:path lidl:elementShape ;
-    sh:minCount 1 ;
-    sh:node lidl:Layout ;
-  ] ;
+  sh:xone (
+    [
+      sh:property [
+        sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
+        sh:path lidl:elementShape ;
+        sh:minCount 1 ;
+        sh:node lidl:Layout ;
+      ]
+    ] 
+    [
+      sh:property [
+        sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
+        sh:path lidl:elementShape ;
+        sh:minCount 1 ;
+        sh:class lidl:Layout ;
+      ]
+    ] 
+  ) ;
   sh:xone ( 
     [
       sh:property [
