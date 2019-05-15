@@ -30,8 +30,7 @@ lidl:BigEndian a lidl:Endianess .
 ######################################################
 
 lidl:Layout
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf sh:NodeShape ;
+  a sh:NodeShape ;
   sh:property [
     sh:description "Each layout MAY specify its endianess" ;
     sh:path lidl:endianess ;
@@ -50,7 +49,7 @@ lidl:endianess
 ######################################################
 
 lidl:Composite
-  a rdfs:Class , sh:NodeShape ;
+  a sh:NodeShape ;
   rdfs:subClassOf lidl:Layout ;
   sh:property [
     sh:description "Each Composite layout MUST have some attributes" ;
@@ -71,7 +70,7 @@ lidl:attribute
 ######################################################
 
 lidl:Atomic
-  a rdfs:Class , sh:NodeShape ;
+  a sh:NodeShape ;
   rdfs:subClassOf lidl:Layout ;
   sh:property [
     sh:description "Each Atomic layout MUST map to an RDFS datatype" ;
@@ -124,8 +123,7 @@ lidl:value
 ######################################################
 
 lidl:Attribute
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf sh:NodeShape ;
+  a sh:NodeShape ;
   sh:property [
     sh:description "Each attribute SHOULD define its order in a layout." ;
     sh:path lidl:order ;
@@ -142,7 +140,6 @@ lidl:Attribute
     sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
     sh:path lidl:elementShape ;
     sh:minCount 1 ;
-#    sh:maxCount 1 ;
     sh:node lidl:Layout ;
   ] ;
   sh:xone ( 
@@ -193,7 +190,6 @@ lidl:elementShape
 
 lidl:Expression
   a sh:NodeShape ;
-  rdfs:subClassOf sh:NodeShape ;
   sh:property [
     sh:path lidl:operator ;
     sh:minCount 1 ;
@@ -203,7 +199,6 @@ lidl:Expression
 
 lidl:ArgumentList
   a sh:NodeShape ;
-  rdfs:subClassOf sh:NodeShape ;
   sh:property [
     sh:path [ sh:zeroOrMorePath rdf:rest ] ;
     sh:hasValue rdf:nil ;
@@ -212,7 +207,6 @@ lidl:ArgumentList
 
 lidl:Argument
   a sh:NodeShape ;
-  rdfs:subClassOf sh:NodeShape ;
   sh:or (
     [
       sh:hasValue rdf:nil ;
@@ -379,7 +373,6 @@ lidl:Int8
 
 lidl:UInt16
   rdfs:label "A 16-bit unsigned integer" ;
-#  a rdfs:Class , sh:NodeShape ;
   a lidl:Atomic ;
   lidl:byteSize 2 ;
   lidl:bitSize 16 ;
