@@ -36,6 +36,12 @@ lidl:Layout
     sh:path lidl:endianess ;
     sh:maxCount 1 ;
     sh:in ( lidl:BigEndian lidl:MiddleEndian lidl:LittleEndian )
+  ] ;
+  sh:property [
+    sh:description "A layout MAY be specified as marshallable." ;
+    sh:path lidl:marshallable ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:boolean
   ] .
 
 lidl:endianess
@@ -43,6 +49,10 @@ lidl:endianess
   rdfs:domain lidl:Layout ;
   rdfs:range lidl:Endianess .
 
+lidl:marshallable 
+  a rdf:Property ;
+  rdfs:domain lidl:Layout ;
+  rdfs:range xsd:boolean .
 
 ######################################################
 # lidl:Composite and related properties

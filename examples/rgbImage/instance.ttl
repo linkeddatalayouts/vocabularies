@@ -1,27 +1,12 @@
-@prefix dash: <http://datashapes.org/dash#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix lidl: <http://www.foo.org/lidl#> .
-@prefix ex:	<http://example.com/ns#> .
-@prefix img: <http://www.bar.org/2001/XMLSchema#> .
+@prefix lidl: <https://linkeddatalayouts.github.io/vocabularies/lidl.ttl#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix exif: <http://www.w3.org/2003/12/exif/ns> .
-
-##################################################
-## External vocabs
-##################################################
-
-rdf:value a rdf:Property .
-dcat:byteSize a rdf:Property .
-dct:format  a rdf:Property .
-dcat:downloadURL a rdf:Property .
-exif:width a rdf:Property .
-exif:height a rdf:Property .
-
+@prefix img: <http://www.example.org/2001/image/ns#> .
 
 
 ##################################################
@@ -33,10 +18,9 @@ exif:height a rdf:Property .
   exif:width 3 ;
   exif:height 5 ;
   img:pixels [
-    a img:PixelBuffer ;
-    # auto-generate if downloadable flag is set    
+    # auto-generated since defined as marshallable
     a img:RGBPixelBuffer, dcat:Distribution ;
     dcat:downloadURL "cuteKitty#pixels"^^xsd:anyURI ;
     dct:format "application/octet-stream" ;
-    dcat:byteSize 45 ;
+    dcat:byteSize 45 
   ] .

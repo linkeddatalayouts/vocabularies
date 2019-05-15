@@ -2,107 +2,70 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix lidl: <http://www.dfki.org/lidl#> .
-
-@prefix ex:	<http://example.com/ns#> .
-@prefix img: <http://www.bar.org/2001/XMLSchema#> .
+@prefix lidl: <https://linkeddatalayouts.github.io/vocabularies/lidl.ttl#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix exif: <http://www.w3.org/2003/12/exif/ns> .
+@prefix img: <http://www.example.org/2001/image/ns#> .
 
 ##################################################
-## External vocabs
+# RGB Image Layout
 ##################################################
-
-rdf:value a rdf:Property .
-dcat:byteSize a rdf:Property .
-dct:format  a rdf:Property .
-dcat:downloadURL a rdf:Property .
-exif:width a rdf:Property .
-exif:height a rdf:Property .
-
-img:pixels a rdf:Property .
-img:red a rdf:Property .
-img:blue a rdf:Property .
-img:green a rdf:Property . 
-
-
-##################################################
-# Layout (meta)
-##################################################
-
 
 img:RGBImage
-  a lidl:Composite ; 
   lidl:endianess lidl:LittleEndian ;
-  lidl:attribute _:width , _:height , _:pixels .
-
+  lidl:attribute _:width , _:height , _:pixels . 
+  
 _:width
-  a lidl:Attribute ;
+  lidl:predicate exif:width ;
   lidl:order 0;
-  lidl:predicate  exif:width ;
-  lidl:elementCount 1 ;
-  lidl:elementShape [
-    a lidl:Atomic ;
-    lidl:endianess lidl:LittleEndian ;
-    lidl:byteSize 4 ;
-    lidl:datatype xsd:integer
-  ] .
-
+  lidl:count 1 ;
+  lidl:layout lidl:Int32 .
+    
 _:height
-  a lidl:Attribute ;
-  lidl:order 1;
   lidl:predicate exif:height ;
-  lidl:elementCount 1 ;
-  lidl:elementShape [
-    a lidl:Atomic ;
-    lidl:endianess lidl:LittleEndian ;
-    lidl:byteSize 4 ;
-    lidl:datatype xsd:integer
-  ] .
+  lidl:order 1;
+  lidl:count 1 ;
+  lidl:layout lidl:Int32 . 
 
 _:pixels
-  a lidl:Attribute ;
-  lidl:endianess lidl:LittleEndian ;
-  lidl:order 2 ;
   lidl:predicate img:pixels ; 
-  lidl:elementCount 1 ;
-  lidl:elementShape img:RGBPixel .
+  lidl:order 2 ;
+  lidl:count 1 ;
+  lidl:layout img:RGBPixelBuffer .
 
 
+##################################################
+# RGB Pixel Buffer Layout
+##################################################
+
+img:RGBPixelBuffer
+  lidl:marshallable "true"^^xsd:boolean ;
+  lidl:attribute [
+      lidl:order 0 ;
+      lidl:count [ lidl:mul ( _:width _:height ) ] ;
+      lidl:layout img:RGBPixel .
+  ] .
+
+
+##################################################
+# RGB Pixel Layout
+##################################################
 
 img:RGBPixel
-  a lidl:Composite ;
-  lidl:endianess lidl:LittleEndian ;
-  lidl:attribute _:red , _:green , _:blue . 
-
-_:red
-  a lidl:Attribute ;
-  lidl:order 0;
-  lidl:predicate img:red ; 
-  lidl:elementCount 1 ;
-  lidl:elementShape [
-    a lidl:Atomic ;
-    lidl:endianess lidl:LittleEndian ;
-    lidl:byteSize 1 ;
-    lidl:datatype xsd:unsignedByte 
+  lidl:attribute [
+    lidl:predicate img:red ;
+    lidl:order 0;
+    lidl:count 1 ;
+    lidl:layout lidl:UInt8   
+  ] , [
+    lidl:predicate img:green ;
+    lidl:order 1;
+    lidl:count 1 ;
+    lidl:layout lidl:UInt8     
+  ] , [
+    lidl:predicate img:blue ;
+    lidl:order 2;
+    lidl:count 1 ;
+    lidl:layout lidl:UInt8     
   ] .
-
-_:green
-  a lidl:Attribute ;
-  lidl:order 1;
-  lidl:predicate img:green ;
-  lidl:elementCount 1 ;
-  lidl:elementShape [
-    a lidl:Atomic ;
-    lidl:endianess lidl:LittleEndian ;
-    lidl:byteSize 1 ;
-    lidl:datatype xsd:unsignedByte 
-  ] .
-
-_:blue
-  a lidl:Attribute ;
-  lidl:order 2;
-  lidl:predicate img:blue ;
-  lidl:elementCount 1 ;
-  lidl:elementShape lidl:UnsignedByte .
