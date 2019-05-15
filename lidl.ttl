@@ -379,7 +379,7 @@ lidl:Int8
 
 lidl:UInt16
   rdfs:label "A 16-bit unsigned integer" ;
-  a rdfs:Class , sh:NodeShape ;
+#  a rdfs:Class , sh:NodeShape ;
   rdfs:subClassOf lidl:Atomic ;
   lidl:byteSize 2 ;
   lidl:bitSize 16 ;
