@@ -137,20 +137,16 @@ lidl:Attribute
     sh:class rdf:Property ;
   ] ;
   sh:property [
-    sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
-    sh:path lidl:elementShape ;
+    sh:description "Each attribute MUST specify the layout of its (sub) elements." ;
+    sh:path lidl:layout ;
     sh:minCount 1 ;
     sh:or ( [ sh:node lidl:Atomic ] [ sh:node lidl:Composite ] ) 
-#    sh:or (
-#      [ sh:node lidl:Layout ]
-#      [ sh:class lidl:Layout ]
-#    )
   ] ;
   sh:xone ( 
     [
       sh:property [
         sh:description "Each attribute SHOULD specify the number of its (sub) elements." ;
-        sh:path lidl:elementCount ;
+        sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:datatype xsd:integer ;
       ]
@@ -158,7 +154,7 @@ lidl:Attribute
     [
       sh:property [
         sh:description "Each attribute SHOULD specify the number of its (sub) elements." ;
-        sh:path lidl:elementCount ;
+        sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:node lidl:Expression ;
       ]
@@ -177,12 +173,12 @@ lidl:predicate
   rdfs:domain lidl:Attribute ;
   rdfs:range rdf:Property .
 
-lidl:elementCount
+lidl:count
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
   rdfs:range xsd:integer .
 
-lidl:elementShape
+lidl:layout
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
   rdfs:range lidl:Layout .
