@@ -140,7 +140,7 @@ lidl:Attribute
     sh:description "Each attribute MUST specify the shape of its (sub) elements." ;
     sh:path lidl:elementShape ;
     sh:minCount 1 ;
-    sh:node sh:or ( lidl:Atomic lidl:Composite ) 
+    sh:or ( [ sh:node lidl:Atomic ] [ sh:node lidl:Composite ] ) 
 #    sh:or (
 #      [ sh:node lidl:Layout ]
 #      [ sh:class lidl:Layout ]
