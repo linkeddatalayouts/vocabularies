@@ -364,8 +364,7 @@ lidl:ByteBoolean
 
 lidl:UInt8
   rdfs:label "An 8-bit unsigned integer" ;
-  a rdfs:Class , sh:NodeShape ;
-  rdfs:subClassOf lidl:Atomic ;
+  a lidl:Atomic ;
   lidl:byteSize 1 ;
   lidl:bitSize 8 ;
   lidl:datatype xsd:unsignedByte .
