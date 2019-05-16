@@ -32,16 +32,10 @@ lidl:BigEndian a lidl:Endianess .
 lidl:Layout
   a sh:NodeShape ;
   sh:property [
-    sh:description "Each layout MAY specify its endianess" ;
+    sh:message "Each layout MAY specify its endianess" ;
     sh:path lidl:endianess ;
     sh:maxCount 1 ;
     sh:in ( lidl:BigEndian lidl:MiddleEndian lidl:LittleEndian )
-  ] ;
-  sh:property [
-    sh:description "A layout MAY be specified as marshallable." ;
-    sh:path lidl:marshallable ;
-    sh:maxCount 1 ;
-    sh:datatype xsd:boolean
   ] .
 
 lidl:endianess
@@ -49,10 +43,6 @@ lidl:endianess
   rdfs:domain lidl:Layout ;
   rdfs:range lidl:Endianess .
 
-lidl:marshallable 
-  a rdf:Property ;
-  rdfs:domain lidl:Layout ;
-  rdfs:range xsd:boolean .
 
 ######################################################
 # lidl:Composite and related properties
@@ -62,10 +52,16 @@ lidl:Composite
   a sh:NodeShape ;
   rdfs:subClassOf lidl:Layout ;
   sh:property [
-    sh:description "Each Composite layout MUST have some attributes" ;
+    sh:message "Each Composite layout MUST have some attributes" ;
     sh:path lidl:attribute ;
     sh:minCount 1 ;
     sh:node lidl:Attribute
+  ] ;
+  sh:property [
+    sh:message "A layout MAY be specified as marshallable." ;
+    sh:path lidl:marshallable ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:boolean
   ] .
 
 lidl:attribute
@@ -73,6 +69,11 @@ lidl:attribute
   rdfs:subPropertyOf sh:property ;
   rdfs:domain lidl:Composite ;
   rdfs:range lidl:Attribute .
+
+lidl:marshallable 
+  a rdf:Property ;
+  rdfs:domain lidl:Composite ;
+  rdfs:range xsd:boolean .
 
 
 ######################################################
@@ -83,7 +84,7 @@ lidl:Atomic
   a sh:NodeShape ;
   rdfs:subClassOf lidl:Layout ;
   sh:property [
-    sh:description "Each Atomic layout MUST map to an RDFS datatype" ;
+    sh:message "Each Atomic layout MUST map to an RDFS datatype" ;
     sh:path lidl:datatype ;
     sh:minCount 1 ;
     sh:maxCount 1
@@ -91,7 +92,7 @@ lidl:Atomic
   sh:or (
     [
       sh:property [
-        sh:description "Each Atomic layout MUST specify its bitSize or byteSize." ;
+        sh:message "Each Atomic layout MUST specify its bitSize or byteSize." ;
         sh:path lidl:bitSize ;
         sh:minCount 1 ;
         sh:datatype xsd:integer
@@ -99,7 +100,7 @@ lidl:Atomic
     ]
     [
       sh:property [
-        sh:description "Each Atomic layout MUST specify its bitSize or byteSize." ;
+        sh:message "Each Atomic layout MUST specify its bitSize or byteSize." ;
         sh:path lidl:byteSize ;
         sh:minCount 1 ;
         sh:datatype xsd:integer
@@ -135,19 +136,19 @@ lidl:value
 lidl:Attribute
   a sh:NodeShape ;
   sh:property [
-    sh:description "Each attribute SHOULD define its order in a layout." ;
+    sh:message "Each attribute SHOULD define its order in a layout." ;
     sh:path lidl:order ;
     sh:maxCount 1 ;
     sh:datatype xsd:integer ;
   ] ;
   sh:property [
-    sh:description "Each attribute MAY map via the specified Property." ;
+    sh:message "Each attribute MAY map via the specified Property." ;
     sh:path lidl:predicate ;
     sh:maxCount 1 ;
     sh:class rdf:Property ;
   ] ;
   sh:property [
-    sh:description "Each attribute MUST specify the layout of its (sub) elements." ;
+    sh:message "Each attribute MUST specify the layout of its (sub) elements." ;
     sh:path lidl:layout ;
     sh:minCount 1 ;
     sh:or ( 
@@ -160,7 +161,7 @@ lidl:Attribute
   sh:xone ( 
     [
       sh:property [
-        sh:description "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:datatype xsd:integer ;
@@ -168,7 +169,7 @@ lidl:Attribute
     ]
     [
       sh:property [
-        sh:description "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:node lidl:Expression ;
