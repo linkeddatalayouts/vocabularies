@@ -123,11 +123,6 @@ lidl:byteSize
   rdfs:domain lidl:Atomic ;
   rdfs:range xsd:integer .
 
-lidl:value
-  a rdf:Property ;
-  rdfs:domain lidl:Atomic ;
-  rdfs:range rdf:Literal .
-
 
 ######################################################
 # lidl:Attribute and related properties
@@ -175,6 +170,22 @@ lidl:Attribute
         sh:node lidl:Expression ;
       ]
     ]
+  ) ;
+  sh:xone (
+    [
+      sh:property [
+        sh:description "Each attribute CAN specify parsing conditions." ;
+        sh:path lidl:condition ;
+        sh:node lidl:Expression ;
+      ]
+    ]
+    [
+      sh:property [
+        sh:description "Each attribute CAN specify parsing conditions." ;
+        sh:path lidl:condition ;
+        sh:class lidl:Attribute ;
+      ]
+    ]
   ) .
 
 
@@ -198,7 +209,20 @@ lidl:layout
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
   rdfs:range lidl:Layout .
+  
+lidl:value
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range rdf:Literal .
 
+lidl:delimiter a rdf:Property .
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range rdf:Literal .
+
+lidl:condition a rdf:Property .
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute  .
 
 ######################################################
 # lidl:Expressions and predefined operators
