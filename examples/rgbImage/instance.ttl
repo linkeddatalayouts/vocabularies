@@ -18,7 +18,7 @@
   exif:width 3 ;
   exif:height 5 ;
   img:pixels [
-    # auto-generated since defined as marshallable
+    # auto-generated since defined as distributable
     a img:RGBPixelBuffer, dcat:Distribution ;
     dcat:downloadURL "cuteKitty#pixels"^^xsd:anyURI ;
     dct:format "application/octet-stream" ;

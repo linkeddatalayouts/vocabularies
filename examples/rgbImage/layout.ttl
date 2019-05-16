@@ -40,7 +40,7 @@ _:pixels
 ##################################################
 
 img:RGBPixelBuffer
-  lidl:marshallable "true"^^xsd:boolean ;
+  lidl:distributable "true"^^xsd:boolean ;
   lidl:attribute [
       lidl:order 0 ;
       lidl:count [ lidl:mul ( _:width _:height ) ] ;
