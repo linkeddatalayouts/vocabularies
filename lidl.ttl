@@ -10,9 +10,8 @@
 # TODO
 #####################################################
 
-lidl:resourcifyRawData a rdf:Property .
-lidl:delimiter a rdf:Property .
-lidl:condition a rdf:Property .
+#lidl:delimiter a rdf:Property .
+#lidl:condition a rdf:Property .
 
 
 ######################################################
@@ -66,7 +65,7 @@ lidl:Composite
 
 lidl:attribute
   a rdf:Property ;
-  rdfs:subPropertyOf sh:property ;
+#  rdfs:subPropertyOf sh:property ;
   rdfs:domain lidl:Composite ;
   rdfs:range lidl:Attribute .
 
@@ -199,12 +198,12 @@ lidl:Attribute
 
 lidl:order
   a rdf:Property ;
-  rdfs:subClassOf sh:order ;
+#  rdfs:subPropertyOf sh:order ;
   rdfs:domain lidl:Attribute .
 
 lidl:predicate
   a rdf:Property ;
-  rdfs:subClassOf sh:path ; #tbd wollen wir property paths?
+#  rdfs:subPropertyOf sh:path ; #tbd wollen wir property paths?
   rdfs:domain lidl:Attribute ;
   rdfs:range rdf:Property .
 
