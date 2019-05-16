@@ -169,41 +169,16 @@ lidl:Attribute
         sh:node lidl:Expression ;
       ]
     ]
-	    [
-      sh:property [
-        sh:description "Each attribute SHOULD specify the number of its (sub) elements or a delimiter." ;
-        sh:path lidl:delimiter ;
-        sh:maxCount 1 ;
-        sh:node rdf:Literal ;
-      ]
-    ]
-  ) ;
-  sh:xone (
-    [
-      sh:property [
-        sh:description "Each attribute CAN specify parsing conditions." ;
-        sh:path lidl:condition ;
-        sh:node lidl:Expression ;
-      ]
-    ]
-    [
-      sh:property [
-        sh:description "Each attribute CAN specify parsing conditions." ;
-        sh:path lidl:condition ;
-        sh:class lidl:Attribute ;
-      ]
-    ]
   ) .
 
 
 lidl:order
   a rdf:Property ;
-#  rdfs:subPropertyOf sh:order ;
-  rdfs:domain lidl:Attribute .
+  rdfs:domain lidl:Attribute ;
+  rdfs:range xsd:integer .
 
 lidl:predicate
   a rdf:Property ;
-#  rdfs:subPropertyOf sh:path ; #tbd wollen wir property paths?
   rdfs:domain lidl:Attribute ;
   rdfs:range rdf:Property .
 
@@ -222,14 +197,6 @@ lidl:value
   rdfs:domain lidl:Attribute ;
   rdfs:range rdf:Literal .
 
-lidl:delimiter a rdf:Property .
-  a rdf:Property ;
-  rdfs:domain lidl:Attribute ;
-  rdfs:range rdf:Literal .
-
-lidl:condition a rdf:Property .
-  a rdf:Property ;
-  rdfs:domain lidl:Attribute  .
 
 ######################################################
 # lidl:Expressions and predefined operators
