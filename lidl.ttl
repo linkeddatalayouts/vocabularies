@@ -156,7 +156,7 @@ lidl:Attribute
   sh:xone ( 
     [
       sh:property [
-        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements or a delimiter.." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:datatype xsd:integer ;
@@ -164,10 +164,18 @@ lidl:Attribute
     ]
     [
       sh:property [
-        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements or a delimiter.." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:node lidl:Expression ;
+      ]
+    ]
+	    [
+      sh:property [
+        sh:description "Each attribute SHOULD specify the number of its (sub) elements or a delimiter." ;
+        sh:path lidl:delimiter ;
+        sh:maxCount 1 ;
+        sh:node rdf:Literal ;
       ]
     ]
   ) ;
