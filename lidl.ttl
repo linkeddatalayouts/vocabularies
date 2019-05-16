@@ -122,11 +122,6 @@ lidl:byteSize
   rdfs:domain lidl:Atomic ;
   rdfs:range xsd:integer .
 
-lidl:value
-  a rdf:Property ;
-  rdfs:domain lidl:Atomic ;
-  rdfs:range rdf:Literal .
-
 
 ######################################################
 # lidl:Attribute and related properties
@@ -160,7 +155,7 @@ lidl:Attribute
   sh:xone ( 
     [
       sh:property [
-        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements or a delimiter.." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:datatype xsd:integer ;
@@ -168,10 +163,34 @@ lidl:Attribute
     ]
     [
       sh:property [
-        sh:message "Each attribute SHOULD specify the number of its (sub) elements." ;
+        sh:message "Each attribute SHOULD specify the number of its (sub) elements or a delimiter.." ;
         sh:path lidl:count ;
         sh:maxCount 1 ;
         sh:node lidl:Expression ;
+      ]
+    ]
+	    [
+      sh:property [
+        sh:description "Each attribute SHOULD specify the number of its (sub) elements or a delimiter." ;
+        sh:path lidl:delimiter ;
+        sh:maxCount 1 ;
+        sh:node rdf:Literal ;
+      ]
+    ]
+  ) ;
+  sh:xone (
+    [
+      sh:property [
+        sh:description "Each attribute CAN specify parsing conditions." ;
+        sh:path lidl:condition ;
+        sh:node lidl:Expression ;
+      ]
+    ]
+    [
+      sh:property [
+        sh:description "Each attribute CAN specify parsing conditions." ;
+        sh:path lidl:condition ;
+        sh:class lidl:Attribute ;
       ]
     ]
   ) .
@@ -197,7 +216,20 @@ lidl:layout
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
   rdfs:range lidl:Layout .
+  
+lidl:value
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range rdf:Literal .
 
+lidl:delimiter a rdf:Property .
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute ;
+  rdfs:range rdf:Literal .
+
+lidl:condition a rdf:Property .
+  a rdf:Property ;
+  rdfs:domain lidl:Attribute  .
 
 ######################################################
 # lidl:Expressions and predefined operators
