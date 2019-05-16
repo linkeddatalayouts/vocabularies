@@ -54,18 +54,8 @@ img:RGBPixelBuffer
 
 img:RGBPixel
   lidl:attribute [
-    lidl:predicate img:red ;
     lidl:order 0;
-    lidl:count 1 ;
-    lidl:layout lidl:UInt8   
-  ] , [
-    lidl:predicate img:green ;
-    lidl:order 1;
-    lidl:count 1 ;
-    lidl:layout lidl:UInt8     
-  ] , [
-    lidl:predicate img:blue ;
-    lidl:order 2;
-    lidl:count 1 ;
-    lidl:layout lidl:UInt8     
+    lidl:count 3 ;
+    lidl:layout lidl:UInt8  
   ] .
+
