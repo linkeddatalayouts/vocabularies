@@ -1,0 +1,71 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix lidl: <http://www.dfki.org/lidl#> .
+@prefix ppm:	<http://ppm.example.com/ns#> .
+
+
+##################################################
+# PPM Image Layout
+##################################################
+
+ppm:ImageLayout
+  lidl:endianess lidl:LittleEndian ;
+  lidl:attribute ppm:Header , ppm:ImageData .
+
+ppm:Header
+    lidl:order 0 ;
+    lidl:count 1 ;
+    lidl:layout ppm:HeaderLayout .
+
+ppm:ImageData .
+  lidl:order 0;
+  lidl:count 1 ;
+  lidl:layout ppm:ImageDataLayout .
+
+##################################################
+# PPM Header Layout
+##################################################
+
+ppm:HeaderLayout
+  lidl:attribute ppm:Magic , ppm:Width , ppm:Height , ppm:MaxColorValue .
+
+ppm:Magic
+  lidl:order 0 ;
+  lidl:count 2 ;
+  lidl:layout lidl:ASCII .
+  lidl:value "P6" .
+
+ppm:Width
+  lidl:order 1 ; 
+  lidl:count 1 ;
+  lidl:layout lidl:UInt32 .
+
+ppm:Height
+  lidl:order 2 ; 
+  lidl:count 1 ;
+  lidl:layout lidl:UInt32 .
+
+ppm:MaxColorValue
+  lidl:order 3 ; 
+  lidl:count 1 ;
+  lidl:layout lidl:UInt8 .
+
+##################################################
+# PPM ImageData Layout
+##################################################
+
+ppm:ImageDataLayout
+  lidl:attribute [
+      lidl:order 0 ;
+      lidl:count [ lidl:mul ( _:width _:height ) ] ;
+      lidl:layout ppm:Pixel 
+  ] .
+
+ppm:Pixel
+  lidl:attribute [
+    lidl:order 0;
+    lidl:count 3 ;
+    lidl:layout lidl:UInt8  
+  ] .
