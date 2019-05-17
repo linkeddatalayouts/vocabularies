@@ -259,6 +259,10 @@ lidl:operator
   rdfs:domain lidl:Expression ;
   rdfs:range lidl:ArgumentList .
 
+lidl:eval
+  rdfs:range lidl:ArgumentList ;
+  rdfs:subPropertyOf lidl:operator .
+
 lidl:add
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
