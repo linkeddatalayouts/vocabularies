@@ -1,0 +1,23 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ppm:  <http://ppm.example.com/ns#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix exif: <http://www.w3.org/2003/12/exif/ns> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <https://github.com/linkeddatalayouts/vocabularies/blob/master/examples/ppm/> .
+
+<>
+  a foaf:Image ;
+  rdfs:isDefinedBy ppm:ImageLayout ;
+  owl:sameAs ex:rocket.ppm ;
+  exif:width "640"^^xsd:int ;
+  exif:height "427"^^xsd:int ;
+  img:pixels [
+    a dcat:Distribution ;
+    rdfs:isDefinedBy ppm:ImageDataLayout ;
+    dcat:downloadURL ex:rocket.bin ;
+    dct:format "application/octet-stream" ;
+    dcat:byteSize 819840 
+  ] .
