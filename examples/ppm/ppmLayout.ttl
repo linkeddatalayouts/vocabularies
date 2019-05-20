@@ -2,7 +2,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix lidl: <http://www.dfki.org/lidl#> .
+@prefix lidl: <https://linkeddatalayouts.github.io/vocabularies/lidl.ttl#> .
 @prefix ppm:	<http://ppm.example.com/ns#> .
 
 
@@ -19,8 +19,8 @@ ppm:Header
     lidl:count 1 ;
     lidl:layout ppm:HeaderLayout .
 
-ppm:ImageData .
-  lidl:order 0;
+ppm:ImageData
+  lidl:order 1;
   lidl:count 1 ;
   lidl:layout ppm:ImageDataLayout .
 
@@ -34,7 +34,7 @@ ppm:HeaderLayout
 ppm:Magic
   lidl:order 0 ;
   lidl:count 2 ;
-  lidl:layout lidl:ASCII .
+  lidl:layout lidl:ASCII ;
   lidl:value "P6" .
 
 ppm:Width
@@ -59,7 +59,7 @@ ppm:MaxColorValue
 ppm:ImageDataLayout
   lidl:attribute [
       lidl:order 0 ;
-      lidl:count [ lidl:mul ( _:width _:height ) ] ;
+      lidl:count [ lidl:mul ( ppm:Height ppm:Height ) ] ;
       lidl:layout ppm:Pixel
   ] .
 
