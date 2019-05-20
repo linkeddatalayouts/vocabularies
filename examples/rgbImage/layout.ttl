@@ -13,23 +13,23 @@
 ##################################################
 
 img:RGBImage
-  lidl:endianess lidl:LittleEndian ;
-  lidl:attribute _:width , _:height , _:pixels . 
-  
+  lidl:endianness lidl:LittleEndian ;
+  lidl:attribute _:width , _:height , _:pixels .
+
 _:width
   lidl:predicate exif:width ;
   lidl:order 0;
   lidl:count 1 ;
   lidl:layout lidl:Int32 .
-    
+
 _:height
   lidl:predicate exif:height ;
   lidl:order 1;
   lidl:count 1 ;
-  lidl:layout lidl:Int32 . 
+  lidl:layout lidl:Int32 .
 
 _:pixels
-  lidl:predicate img:pixels ; 
+  lidl:predicate img:pixels ;
   lidl:order 2 ;
   lidl:count 1 ;
   lidl:layout img:RGBPixelBuffer .
@@ -44,7 +44,7 @@ img:RGBPixelBuffer
   lidl:attribute [
       lidl:order 0 ;
       lidl:count [ lidl:mul ( _:width _:height ) ] ;
-      lidl:layout img:RGBPixel 
+      lidl:layout img:RGBPixel
   ] .
 
 
@@ -56,6 +56,5 @@ img:RGBPixel
   lidl:attribute [
     lidl:order 0;
     lidl:count 3 ;
-    lidl:layout lidl:UInt8  
+    lidl:layout lidl:UInt8
   ] .
-

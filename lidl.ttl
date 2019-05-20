@@ -15,13 +15,13 @@
 
 
 ######################################################
-# lidl:Endianess and its instances
+# lidl:Endianness and its instances
 ######################################################
 
-lidl:Endianess a rdfs:Class .
-lidl:LittleEndian a lidl:Endianess .
-lidl:MiddleEndian a lidl:Endianess .
-lidl:BigEndian a lidl:Endianess .
+lidl:Endianness a rdfs:Class .
+lidl:LittleEndian a lidl:Endianness .
+lidl:MiddleEndian a lidl:Endianness .
+lidl:BigEndian a lidl:Endianness .
 
 
 ######################################################
@@ -31,16 +31,16 @@ lidl:BigEndian a lidl:Endianess .
 lidl:Layout
   a sh:NodeShape ;
   sh:property [
-    sh:message "Each layout MAY specify its endianess" ;
-    sh:path lidl:endianess ;
+    sh:message "Each layout MAY specify its endianness" ;
+    sh:path lidl:endianness ;
     sh:maxCount 1 ;
     sh:in ( lidl:BigEndian lidl:MiddleEndian lidl:LittleEndian )
   ] .
 
-lidl:endianess
+lidl:endianness
   a rdf:Property ;
   rdfs:domain lidl:Layout ;
-  rdfs:range lidl:Endianess .
+  rdfs:range lidl:Endianness .
 
 
 ######################################################
@@ -69,7 +69,7 @@ lidl:attribute
   rdfs:domain lidl:Composite ;
   rdfs:range lidl:Attribute .
 
-lidl:distributable 
+lidl:distributable
   a rdf:Property ;
   rdfs:domain lidl:Composite ;
   rdfs:range xsd:boolean .
@@ -145,14 +145,14 @@ lidl:Attribute
     sh:message "Each attribute MUST specify the layout of its (sub) elements." ;
     sh:path lidl:layout ;
     sh:minCount 1 ;
-    sh:or ( 
-        [ sh:class lidl:Atomic ] 
-        [ sh:node lidl:Atomic ] 
-        [ sh:class lidl:Composite ] 
-        [ sh:node lidl:Composite ] 
-    ) 
+    sh:or (
+        [ sh:class lidl:Atomic ]
+        [ sh:node lidl:Atomic ]
+        [ sh:class lidl:Composite ]
+        [ sh:node lidl:Composite ]
+    )
   ] ;
-  sh:xone ( 
+  sh:xone (
     [
       sh:property [
         sh:message "Each attribute SHOULD specify the number of its (sub) elements or a delimiter.." ;
@@ -191,7 +191,7 @@ lidl:layout
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
   rdfs:range lidl:Layout .
-  
+
 lidl:value
   a rdf:Property ;
   rdfs:domain lidl:Attribute ;
@@ -271,7 +271,7 @@ lidl:minus
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
-lidl:mul 
+lidl:mul
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
@@ -279,7 +279,7 @@ lidl:div
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
-lidl:mod 
+lidl:mod
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
@@ -291,15 +291,15 @@ lidl:le
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
-lidl:leq 
+lidl:leq
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
-lidl:eq 
+lidl:eq
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
-lidl:neq    
+lidl:neq
   rdfs:range lidl:ArgumentList ;
   rdfs:subPropertyOf lidl:operator .
 
@@ -346,7 +346,7 @@ lidl:NOT
 
 
 ######################################################
-# Predefined lidl:Atomic layouts 
+# Predefined lidl:Atomic layouts
 ######################################################
 
 lidl:Bit
