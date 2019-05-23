@@ -449,8 +449,7 @@ lidl:Float64
   owl:sameAs lidl:Double ;
   a lidl:Atomic ;
   lidl:byteSize "1"^^xsd:integer ;
-#  lidl:bitSize "64"^^xsd:integer ;
-  lidl:bitSize "That Seventies Show"@en ;
+  lidl:bitSize "64"^^xsd:integer ;
   lidl:datatype xsd:double .
 
 lidl:ASCII
