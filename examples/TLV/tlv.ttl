@@ -1,61 +1,24 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix lidl: <http://www.dfki.org/lidl#> .
+@prefix lidl: <https://linkeddatalayouts.github.io/vocabularies/lidl.ttl#> .
+@prefix tlv: <http://tlv.example.com/ns#> .
 
-@prefix ex:	<http://example.com/ns#> .
-@prefix img: <http://www.bar.org/2001/XMLSchema#> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix exif: <http://www.w3.org/2003/12/exif/ns> .
+tlv:Sequence lidl:attribute [ lidl:layout tlv:Chunk ] .
 
-lidl:Integer32
-  a lidl:Atomic ;
-  lidl:endianess lidl:LittleEndian ;
-  lidl:byteSize 4 ;
-  lidl:datatype xsd:integer .
-  
-  
-
-
-tlv:TagLengthValue
-  lidl:attribute [
-    lidl:predicate rdf:value ;
-    lidl:order 1;
-    lidl:elementCount lidl:EOS ;
-    lidl:layout tlv:Chunk .
-  ]
-  
-  
-tlv:Chunk
-  lidl:attribute _:tag, _:length , _:value .
+tlv:Chunk lidl:attribute ( _:tag _:length _:value ) .
   
 _:tag
-  lidl:predicate tlv:type ;
-  lidl:order 0;
-  lidl:elementCount 1 ;
-  lidl:layout lidl:Integer32 .
-  
-_:length
-  lidl:predicate tlv:length ;
-  lidl:order 1;
-  lidl:elementCount 1 ;
-  lidl:layout lidl:Integer32 .
-  
-_:value
-  lidl:predicate tlv:value ;
-  lidl:order 2;
-  lidl:elementCount _:length ;
+  lidl:count 1 ;
   lidl:layout lidl:Byte .
   
+_:length
+  lidl:count 1 ;
+  lidl:layout lidl:Int32 .
   
-<cuteKitty>
-  a img:Jpeg, tlv:TagLengthValue ;
-  rdf:value 
-    [ a tlv:Chunk ; tlv:type "1"^^xsd:integer ; tlv:length "4"^^xsd:int ; tlv:value [ #whatever ] ] ,
-    [ a tlv:Chunk ; tlv:type "2"^^xsd:integer ; tlv:length "54"^^xsd:int ; tlv:value [ #whatever ] ] ,
-    [ a tlv:Chunk ; tlv:type "3"^^xsd:integer ; tlv:length "18462"^^xsd:int ; tlv:value [ #whatever ] ] . 
-  
-  
+_:value
+  lidl:count [ lidl:eval ( _:length ) ] ;
+  lidl:layout lidl:Byte . 
   
