@@ -65,14 +65,6 @@ lidl:attribute
   rdfs:domain lidl:Composite ;
   rdfs:range lidl:Attribute .
 
-<<<<<<< HEAD
-=======
-lidl:distributable
-  a rdf:Property ;
-  rdfs:domain lidl:Composite ;
-  rdfs:range xsd:boolean .
-
->>>>>>> a922cc412048b2789bab466257b2297c5e6b7cd6
 
 ######################################################
 # lidl:Atomic and related properties
@@ -123,7 +115,6 @@ lidl:Attribute
     sh:message "Each attribute MUST specify the layout of its (sub) elements." ;
     sh:path lidl:layout ;
     sh:minCount 1 ;
-<<<<<<< HEAD
     sh:maxCount 1 ;
     sh:or ( 
         [ sh:class lidl:Atomic ] 
@@ -160,17 +151,6 @@ lidl:AttributeListNode
   a sh:NodeShape ;
   sh:or ( 
     [ sh:hasValue rdf:nil ;
-=======
-    sh:or (
-        [ sh:class lidl:Atomic ]
-        [ sh:node lidl:Atomic ]
-        [ sh:class lidl:Composite ]
-        [ sh:node lidl:Composite ]
-    )
-  ] ;
-  sh:xone (
-    [
->>>>>>> a922cc412048b2789bab466257b2297c5e6b7cd6
       sh:property [
 	    sh:path rdf:first ;
 	    sh:maxCount 0 ;
@@ -212,7 +192,7 @@ lidl:value
       
 
 ######################################################
-# lidl:Expressions and predefined operators
+# lidl:Expressions
 ######################################################
 
 lidl:Expression
