@@ -63,8 +63,7 @@ lidl:Composite
 
 lidl:attribute
   a rdf:Property ;
-  rdfs:domain lidl:Composite ;
-  rdfs:range lidl:Attribute .
+  rdfs:domain lidl:Composite .
 
 
 ######################################################
