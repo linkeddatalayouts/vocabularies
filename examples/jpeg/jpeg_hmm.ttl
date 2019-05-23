@@ -10,6 +10,95 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix exif: <http://www.w3.org/2003/12/exif/ns> .
 
+Input 1: <katzenbild>
+Input 2: img:RGBImage
+
+
+<katzenbild>
+  a foaf:Image ;
+  rdfs:isDefinedBy img:RGBImage ;
+  exif:width "256"^^xsd:int ;
+  exif:height "256"^^xsd:int ;
+  img:pixels [
+    # auto-generated since defined as distributable
+    a img:RGBPixelBuffer, dcat:Distribution ;
+    dcat:downloadURL "cuteKitty#pixels"^^xsd:anyURI ;
+    dct:format "application/octet-stream" ;
+    dcat:byteSize 45    
+  ]
+
+
+
+<JpegMapping>
+  a lidl:Mapping ;
+  rr:subjectMap [  ] ;
+  rr:predicateObjectMap [ rr:predicate exif:width ; rr:object _:width ] ;
+  rr:predicateObjectMap [ rr:predicate exif:height ; lidl:object _:height ] ;
+  rr:predicateObjectMap   [ rr:predicate img:pixels ; lidl:object _:pixels ] ;
+  rr:predicateObjectMap [ rr:predicate rdfs:isDefinedBy ; lidl:object img:RGBImage  ] ;
+  rr:predicateObjectMap [ rr:predicate rdf:type ; lidl:object foaf:Image ] .
+
+
+
+img:RGBImage
+  lidl:endianess lidl:LittleEndian ;
+  lidl:attribute _:width , _:height , _:pixels . 
+  
+_:width
+  lidl:predicate exif:width ;
+  lidl:order 0;
+  lidl:count 1 ;
+  lidl:layout lidl:Int32 .
+    
+_:height
+  lidl:predicate exif:height ;
+  lidl:order 1;
+  lidl:count 1 ;
+  lidl:layout lidl:Int32 . 
+
+_:pixels
+  lidl:predicate img:pixels ; 
+  lidl:order 2 ;
+  lidl:count 1 ;
+  lidl:layout img:RGBPixelBuffer .
+
+
+##################################################
+# RGB Pixel Buffer Layout
+##################################################
+
+img:RGBPixelBuffer
+  lidl:distributable "true"^^xsd:boolean ;
+  lidl:attribute [
+      lidl:order 0 ;
+      lidl:count [ lidl:mul ( _:width _:height ) ] ;
+      lidl:layout img:RGBPixel 
+  ] .
+
+
+##################################################
+# RGB Pixel Layout
+##################################################
+
+img:RGBPixel
+  lidl:attribute [
+    lidl:order 0;
+    lidl:count 3 ;
+    lidl:layout lidl:UInt8  
+  ] .
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Input 1: <katzenbild>
 Input 2: jpeg:Image

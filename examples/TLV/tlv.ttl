@@ -24,7 +24,7 @@ tlv:TagLengthValue
     lidl:predicate rdf:value ;
     lidl:order 1;
     lidl:elementCount lidl:EOS ;
-    lidl:elementShape tlv:Chunk .
+    lidl:layout tlv:Chunk .
   ]
   
   
@@ -35,19 +35,19 @@ _:tag
   lidl:predicate tlv:type ;
   lidl:order 0;
   lidl:elementCount 1 ;
-  lidl:elementShape lidl:Integer32 .
+  lidl:layout lidl:Integer32 .
   
 _:length
   lidl:predicate tlv:length ;
   lidl:order 1;
   lidl:elementCount 1 ;
-  lidl:elementShape lidl:Integer32 .
+  lidl:layout lidl:Integer32 .
   
 _:value
   lidl:predicate tlv:value ;
   lidl:order 2;
   lidl:elementCount _:length ;
-  lidl:elementShape lidl:Byte .
+  lidl:layout lidl:Byte .
   
   
 <cuteKitty>
