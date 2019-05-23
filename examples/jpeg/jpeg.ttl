@@ -39,6 +39,7 @@ jpeg:Image
 
 jpeg:Segment
   lidl:attribute
+<<<<<<< HEAD
     [ lidl:predicate jpeg:ff ; lidl:order 0 ;  lidl:elementCount 1 ; lidl:layout lidl:Byte ; lidl:constant "FF"^^xsd:hexBinary ] , 
     [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:layout lidl:Byte ] , 
     [ lidl:predicate jpeg:segmentLength ; lidl:order 2 ;  lidl:elementCount 1 ; lidl:layout lidl:UInt16 ] .
@@ -48,21 +49,95 @@ _:bla
   lidl:attribute 
     [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:layout lidl:Byte ; lidl:constant "c0"^^xsd:hexBinary ] ,
     [ lidl:predicate jpeg:data ; lidl:order 3 ;  lidl:elementCount 1 ; lidl:layout jpeg:SegmentSof0 ] .   
+=======
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ]  ] ,
+    [ lidl:predicate jpeg:segmentLength ; lidl:order 2 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:UnsignedShortBigEndian ]  ] .
 
-  
+
+jpeg:Image
+  lidl:attribute
+    _:segments ,
+    [ lidl:predicate exif:width ; lidl:elementCount 1 ; lidl:elementShape _:width ] ,
+    [ lidl:predicate exif:height ; lidl:elementCount 1 ; lidl:elementShape _:height ] .
+
+
+_:segments
+  lidl:order 0 ;
+  lidl:elementCount 100000 ;
+  lidl:elementShape _:bla , _:blub , jpeg:Segment .
+
+
+_:bla
+  a jpeg:Segment ;
+  lidl:attribute
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ; lidl:value "0xc"^^xsd:byte ]  ] ,
+    [ lidl:predicate jpeg:data ; lidl:order 3 ;  lidl:elementCount 1 ; lidl:elementShape jpeg:SegmentSof0 ] .
+
+>>>>>>> a922cc412048b2789bab466257b2297c5e6b7cd6
+
 jpeg:SegmentSof0
   lidl:attribute _:image_height , _:image_width .
 
 _:image_height
   lidl:order 1 ;
   lidl:elementCount 1 ;
+<<<<<<< HEAD
   lidl:layout  lidl:Int32 .
   
+=======
+  lidl:elementShape  _:height .
+
+ _:height a lidl:UnsignedShortBigEndian .
+
+>>>>>>> a922cc412048b2789bab466257b2297c5e6b7cd6
 _:image_width
   lidl:predicate exif:width ;
   lidl:order 2 ;
   lidl:elementCount 1 ;
+<<<<<<< HEAD
   lidl:layout lidl:Int32 . 
   
   
 
+=======
+  lidl:elementShape _:width .
+
+
+_:width a lidl:UnsignedShortBigEndian .
+
+
+_:blub
+  a jpeg:Segment ;
+  lidl:attribute
+    [ lidl:predicate jpeg:marker ; lidl:order 1 ;  lidl:elementCount 1 ; lidl:elementShape [ a lidl:Byte ; lidl:value "0xe0"^^xsd:byte ]  ] ,
+    [ lidl:predicate jpeg:data ; lidl:order 3 ;  lidl:elementCount 1 ; lidl:elementShape jpeg:SegmentApp0 ] .
+
+
+
+
+jpeg:SegmentApp0
+  lidl:attribute _:version_major , _:version_minor .
+
+ _:version_major
+  lidl:predicate jpeg:majorVersion ;
+  lidl:order 1 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape _:1 .
+
+
+_:1 a lidl:UnsignedByte .
+
+ _:version_minor
+  lidl:predicate jpeg:minorVersion ;
+  lidl:order 2 ;
+  lidl:elementCount 1 ;
+  lidl:elementShape _:2 .
+
+_:2 a lidl:UnsignedByte .
+
+lidl:UnsignedShortBigEndian
+  rdfs:subClassOf lidl:Atomic ;
+  lidl:endianness lidl:BigEndian ;
+  lidl:byteSize 1 ;
+  lidl:datatype xsd:unsignedByte .
+>>>>>>> a922cc412048b2789bab466257b2297c5e6b7cd6
