@@ -171,7 +171,7 @@ lidl:AttributeListNode
 	    sh:path rdf:rest ;
  	    sh:maxCount 1 ;
 	    sh:minCount 1 ;
-        sh:node lidl:AttributeList
+#        sh:node lidl:AttributeList
 	  ] ;
     ]
   ) .
@@ -209,10 +209,10 @@ lidl:ArgumentList
   sh:property [
     sh:path [ sh:zeroOrMorePath rdf:rest ] ;
     sh:hasValue rdf:nil ;
-    sh:node lidl:Argument
+    sh:node lidl:ArgumentListNode
   ] .
 
-lidl:Argument
+lidl:ArgumentListNode
   a sh:NodeShape ;
   sh:or (
     [
@@ -242,7 +242,7 @@ lidl:Argument
         sh:path rdf:rest ;
         sh:maxCount 1 ;
         sh:minCount 1 ;
-        sh:node lidl:ArgumentList
+#        sh:node lidl:ArgumentList
       ] ;
     ]
   ) .
