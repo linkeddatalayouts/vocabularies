@@ -86,7 +86,7 @@ lidl:Atomic
       [ sh:path lidl:byteSize ]
     ) ;
     sh:minCount 1 ;
-    sh:datatype xsd:integer
+#    sh:datatype xsd:integer
   ] .
 
 lidl:datatype
