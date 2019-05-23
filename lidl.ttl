@@ -448,8 +448,9 @@ lidl:Float64
   rdfs:seeAlso <https://en.wikipedia.org/wiki/IEEE_754> ;
   owl:sameAs lidl:Double ;
   a lidl:Atomic ;
-  lidl:byteSize "8"^^xsd:integer ;
-  lidl:bitSize "64"^^xsd:integer ;
+  lidl:byteSize "1"^^xsd:integer ;
+#  lidl:bitSize "64"^^xsd:integer ;
+  lidl:bitSize "That Seventies Show"@en ;
   lidl:datatype xsd:double .
 
 lidl:ASCII
