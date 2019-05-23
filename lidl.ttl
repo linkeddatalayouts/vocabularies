@@ -58,7 +58,8 @@ lidl:Composite
     sh:xone (
       [ sh:node lidl:Attribute ]
       [ sh:node lidl:AttributeList ]
-    ) .
+    ) 
+  ] .
 
 lidl:attribute
   a rdf:Property ;
